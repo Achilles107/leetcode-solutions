@@ -1,0 +1,63 @@
+// Solution
+
+class CustomStack {
+    public Stack<Integer> stack;
+    public int maxSize;
+    public CustomStack(int maxSize) {
+        this.stack = new Stack<Integer>();
+        this.maxSize = maxSize;
+    }
+    
+    public void push(int x) {
+        if (this.maxSize <= 0)
+            return;
+        stack.push(x);
+        this.maxSize -= 1;
+    }
+    
+    public int pop() {
+        if (stack.isEmpty())
+            return -1;
+        else{
+            this.maxSize += 1;
+            return stack.pop();
+        }
+            
+    }
+    
+    public void increment(int k, int val) {
+        int i =stack.size();
+        if (k > stack.size()){
+            k = stack.size();
+            i = k;
+        } else if(k < stack.size()){
+            i = stack.size();
+        }
+        //System.out.println(stack);
+        Stack<Integer> dummy = new Stack<>();
+        while (i>0){
+           // System.out.println("i " + i);
+            if (i <= k){
+                //System.out.println(stack.peek());
+                dummy.push(stack.pop()+val);
+                //System.out.println(dummy.peek());
+                i--;
+            } else {
+                i--;
+                dummy.push(stack.pop());
+            }
+        }
+        while (!dummy.isEmpty()){
+            stack.push(dummy.pop());
+           // System.out.println("Res " + stack.peek());
+        }
+    }
+}
+
+/**
+ * Your CustomStack object will be instantiated and called as such:
+ * CustomStack obj = new CustomStack(maxSize);
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * obj.increment(k,val);
+ */
