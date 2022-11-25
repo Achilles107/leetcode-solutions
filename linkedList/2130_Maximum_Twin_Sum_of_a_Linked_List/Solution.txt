@@ -1,0 +1,34 @@
+//PsuedoCode
+
+1. find the length
+2. find the middle part
+3. iterate head till the middle part and push values in stack
+4. interate the remaining part and pop values from stack and calculate maxSum
+
+// Solution
+public int len(ListNode node){
+        int len=0;
+        while(node != null){
+            len++;
+            node = node.next;
+        }
+        return len;
+    }
+    public int pairSum(ListNode head) {
+        ListNode dummy = head;
+        int length = len(dummy);
+        Stack<ListNode> halfList = new Stack<>();
+        int i = 0;
+        while (i<(length/2)){
+            ListNode currNode = head;
+            halfList.push(head);
+            head = head.next;
+            i++;
+        }
+        int maxTwinSum = 0;
+        while (head!=null){
+            maxTwinSum = Math.max(maxTwinSum, halfList.pop().val + head.val);
+            head = head.next;
+        }
+        return maxTwinSum;
+    }
