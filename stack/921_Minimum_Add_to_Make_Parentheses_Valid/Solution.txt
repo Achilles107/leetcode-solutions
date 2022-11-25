@@ -1,0 +1,31 @@
+//PsuedoCode
+
+int len = len(string)
+Stack s;
+for i=0 to len-1:
+	if (string[i] == ')' && s not empty)
+		if (s.peek == '(')
+			s.pop
+		else
+			s.push(string[i])
+	else
+		s.push(string[i])
+
+return s.size()
+
+
+//Solution
+public int minAddToMakeValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        int len = s.length();
+        for (int i =0; i<len; i++){
+            if (s.charAt(i) == ')' && !stack.isEmpty())
+                if (stack.peek() == '(')
+                    stack.pop();
+                else
+                    stack.push(s.charAt(i));
+            else
+                stack.push(s.charAt(i));
+        }
+        return stack.size();
+    }
