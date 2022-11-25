@@ -1,0 +1,45 @@
+// PsuedoCode
+
+max(arr, s, e); // returns max element Idx
+
+
+Node formTree(Node root, arr, s, e):
+	if (s>e)
+		return null;
+	maxElement = max(arr, s, e)
+	root = node(arr[maxElement])
+	root.left = formTree(root, s, maxElement-1)
+	root.right = formTree(root, maxElement+1, e)
+	return root;
+
+
+// Solution
+
+public int findMaxIdx(int nums[], int s, int e){
+        int maxIdx = s;
+        int maxElement = nums[s];
+        for (int i = s+1; i<=e; i++){
+            if (nums[i]>maxElement){
+                maxIdx = i;
+                maxElement = nums[i];
+            }
+        }
+        return maxIdx;
+    }
+
+    public TreeNode constructTree(TreeNode root, int[] nums, int s, int e) {
+        if (s > e)
+            return null;
+        int maxIdx = findMaxIdx(nums, s, e);
+        root = new TreeNode(nums[maxIdx]);
+        root.left = constructTree(root, nums, s, maxIdx-1);
+        root.right = constructTree(root, nums, maxIdx+1, e);
+        return root;
+
+    }
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        int maxIdx = findMaxIdx(nums, 0, nums.length-1);
+        TreeNode root = new TreeNode(nums[maxIdx]);
+        TreeNode res = constructTree(root, nums, 0, nums.length-1);
+        return res;
+    }
