@@ -1,0 +1,62 @@
+//PsuedoCode
+
+stack s
+for i to str.length()-1:
+	if (str.charAt(i) == ']'):
+		str1 = ""
+		pop till it hits '[':
+			//form a string
+			str1 = str1 + s.pop() 
+		//remove [
+		s.pop()
+
+		num = "";
+		pop till it is hitting a number or it hits empty:
+			// make the number
+			num = num + s.pop()
+		// form the string to be inserted
+		String s1 = new String(new char[num.reverse()]).replace("\0", str1);
+		s.push()
+	else:
+		s.push(str.charAt(i))
+
+// Take the string from the stack and reverse it and return it
+
+
+// Solution
+
+private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        return pattern.matcher(strNum).matches();
+    }
+    public String decodeString(String s) {
+        Stack<String> stack = new Stack<>();
+        for (int i =0; i<s.length(); i++){
+            if (s.charAt(i) == ']'){
+                StringBuilder repStr = new StringBuilder();
+                while (!stack.peek().equals("[")) {
+                    repStr.append(stack.pop());
+                }
+                stack.pop();
+                StringBuilder number = new StringBuilder();
+                while (!stack.isEmpty() && isNumeric(stack.peek())){
+                    number.append(stack.pop());
+                }
+                //Form the string
+                number.reverse();
+                stack.push(new String(new char[Integer.parseInt(number.toString())]).replace("\0", repStr));
+            } else {
+                stack.push(s.charAt(i)+"");
+
+            }
+        }
+        StringBuilder result = new StringBuilder();
+        while (!stack.isEmpty() && !stack.peek().equals("[")){
+            result.append(stack.pop());
+        }
+        String resRev = result.reverse().toString();
+        return resRev;
+    }
