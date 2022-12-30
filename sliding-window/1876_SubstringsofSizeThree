@@ -1,0 +1,27 @@
+package slidingwindow;
+
+import java.util.*;
+
+public class SubstringsofSizeThree {
+
+    public int countGoodSubstrings(String s) {
+        if (s.length() == 1)
+            return 0;
+        if (s.length() == 2)
+            return 0;
+        Set<Character> uniqueChars = new TreeSet<>();
+        int count =0;
+        for (int i =0; i<s.length()-2; i++){
+            uniqueChars.add(s.charAt(i));
+            uniqueChars.add(s.charAt(i+1));
+            uniqueChars.add(s.charAt(i+2));
+            if (uniqueChars.size() == 3)
+                count++;
+            uniqueChars.clear();
+        }
+        return count;
+    }
+    public static void main(String[] args) {
+        System.out.println(new SubstringsofSizeThree().countGoodSubstrings("aababcabc"));
+    }
+}
