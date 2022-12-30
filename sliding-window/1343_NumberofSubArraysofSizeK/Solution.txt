@@ -1,0 +1,47 @@
+
+//PsuedoCode
+
+function(int []nums, int k, int threshold):
+	//base condition
+	if len(nums) == 1:
+		return nums[0] >= threshold ? 1 : 0;
+	
+	List list;
+	int sum = 0;
+	int count = 0;
+	for i = 0 to n:
+		list.add(nums[i])
+		sum += nums[i]
+		if len(list) == k:
+			if sum / k >= threshold:
+				count ++;
+		sum -= list.remove(0)
+	return count;
+
+   
+// Code Solution
+
+public int numOfSubarrays(int[] arr, int k, int threshold) {
+        if (arr.length == 1)
+            return arr[0] >= threshold ? 1:0;
+        List<Integer> list = new ArrayList<>();
+        int sum = 0;
+        int count = 0;
+        for (int i=0; i<arr.length; i++){
+            list.add(arr[i]);
+            sum += arr[i];
+            if (list.size() == k){
+                if (sum / k >= threshold){
+                    count++;
+                }
+                sum -= list.remove(0);
+            }
+            }
+        return count;
+    }
+
+
+
+
+
+
