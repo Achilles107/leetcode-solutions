@@ -4,33 +4,35 @@ import java.util.*;
 
 public class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        HashMap<Integer, List<Integer>> schedule = new HashMap<>();
-        Arrays.sort(prerequisites, (a, b) -> Integer.compare(a[0], b[0]));
+        HashMap<Integer, List<Integer>> prereqs = new HashMap<>();
         for (int i=0; i<numCourses; i++){
-            schedule.put(i, new ArrayList<>());
+            prereqs.put(i, new ArrayList<>());
         }
-        for (int[] n: prerequisites){
-            schedule.get(n[0]).add(n[1]);
+        for (int i =0; i<prerequisites.length; i++){
+            prereqs.get(prerequisites[i][0]).add(prerequisites[i][1]);
         }
-        boolean visited[] = new boolean[numCourses];
+        boolean cycle[] = new boolean[numCourses];
         boolean seen[] = new boolean[numCourses];
-        for (int i =0; i<numCourses; i++){
-            if (dfs(i, schedule, visited, seen))
+
+        for (Integer course: prereqs.keySet()){
+            if (dfs(course, prereqs, cycle, seen)){
                 return false;
+            }
         }
         return true;
     }
 
-    private boolean dfs(int currNode, HashMap<Integer, List<Integer>> children, boolean[] visited, boolean seen[]) {
+    private boolean dfs(int currNode, HashMap<Integer, List<Integer>> prereqs, boolean[] visited, boolean seen[]) {
         if (visited[currNode])
             return true;
         if (seen[currNode])
             return false;
-        seen[currNode] = true;
         visited[currNode] = true;
-        for (int i =0; i<children.get(currNode).size(); i++){
-            if (dfs(children.get(currNode).get(i), children, visited, seen))
+        seen[currNode] = true;
+        for (int i=0;i<prereqs.get(currNode).size(); i++){
+            if (dfs(prereqs.get(currNode).get(i), prereqs, visited, seen)){
                 return true;
+            }
         }
         visited[currNode] = false;
         return false;
@@ -39,7 +41,7 @@ public class CourseSchedule {
     public static void main(String[] args) {
         CourseSchedule courseSchedule = new CourseSchedule();
         //[1,0],[0,2],[2,1]
-        int arr[][] = {{1,0},{0,2},{2,1}};
-        System.out.println(courseSchedule.canFinish(3, arr));
+        int arr[][] = {{1,0},{0,2},{2,4},{2,3},{5,2}};
+        System.out.println(courseSchedule.canFinish(6, arr));
     }
 }
