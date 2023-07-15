@@ -17,7 +17,6 @@ public class WordSearch {
         }
 
         if (isSafe(board, x, y, word.charAt(indx))) {
-            //System.out.println(word.charAt(indx));
             if (solution[x][y] == 1)
                 return false;
             solution[x][y] = 1;
