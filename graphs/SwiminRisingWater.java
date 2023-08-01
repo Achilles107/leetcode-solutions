@@ -2,6 +2,7 @@ package graphs;
 
 // 18:50 to 19:10
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeSet;
@@ -9,7 +10,7 @@ import java.util.TreeSet;
 public class SwiminRisingWater {
     public int swimInWater(int[][] grid) {
         int size = grid.length;
-        PriorityQueue<Integer> nodeQueue = new PriorityQueue<>((a,b) -> Integer.compare(grid[a / size][a % size], grid[b / size][b % size]));
+        PriorityQueue<Integer> nodeQueue = new PriorityQueue<>(Comparator.comparingInt(a -> grid[a / size][a % size]));
         int moveRow[] = {1,-1, 0, 0};
         int moveCol[] = {0,0, 1, -1};
         Set<Integer> seen = new TreeSet<>();
