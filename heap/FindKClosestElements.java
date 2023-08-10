@@ -2,6 +2,7 @@ package heap;
 
 import java.util.*;
 
+/*
 class CustomComparator implements Comparator<Integer> {
     private int x;
 
@@ -23,6 +24,8 @@ class CustomComparator implements Comparator<Integer> {
         }
     }
 }
+ */
+
 public class FindKClosestElements {
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
         List<Integer> kClosest = new ArrayList<>();
@@ -32,7 +35,18 @@ public class FindKClosestElements {
             }
             return kClosest;
         }
-        PriorityQueue<Integer> largestFirst = new PriorityQueue<>(new CustomComparator(x));
+        PriorityQueue<Integer> largestFirst = new PriorityQueue<>((a, b) -> {
+            int absDiffA = Math.abs(a - x);
+            int absDiffB = Math.abs(b - x);
+
+            if (absDiffA < absDiffB) {
+                return 1;
+            } else if (absDiffA > absDiffB) {
+                return -1;
+            } else {
+                return Integer.compare(b, a);
+            }
+        });
         for (int number: arr) {
             largestFirst.add(number);
             if (largestFirst.size() > k) {
