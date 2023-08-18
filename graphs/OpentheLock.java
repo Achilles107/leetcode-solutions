@@ -7,7 +7,7 @@ public class OpentheLock {
         if (target.equals("0000"))
             return 0;
         List<String> deadendsList = new LinkedList<>();
-        for (String deadend: deadends) {
+        for (String deadend : deadends) {
             deadendsList.add(deadend);
         }
         if (deadendsList.contains("0000")) return -1;
@@ -18,13 +18,13 @@ public class OpentheLock {
         int depth = 0;
         while (!neighbours.isEmpty()) {
             int size = neighbours.size();
-            for (int i=0; i<size; i++) {
+            for (int i = 0; i < size; i++) {
                 String currCombination = neighbours.poll();
                 if (currCombination.equals(target)) {
                     return depth;
                 }
                 List<String> nextCombinations = getCombinations(currCombination);
-                for (String next: nextCombinations) {
+                for (String next : nextCombinations) {
                     if (!deadendsList.contains(next) && !seen.contains(next)) {
                         seen.add(next);
                         neighbours.add(next);
@@ -38,15 +38,16 @@ public class OpentheLock {
 
     private List<String> getCombinations(String currCombination) {
         List<String> nextCombinations = new ArrayList<>();
-        for (int i =0; i<currCombination.length(); i++) {
+        for (int i = 0; i < currCombination.length(); i++) {
             for (int inc = -1; inc <= 1; inc += 2) {
                 int nextDigit = ((currCombination.charAt(i) - '0') + inc + 10) % 10;
-                String nextComb = currCombination.substring(0, i) + nextDigit + currCombination.substring(i+1);
+                String nextComb = currCombination.substring(0, i) + nextDigit + currCombination.substring(i + 1);
                 nextCombinations.add(nextComb);
             }
         }
         return nextCombinations;
     }
+
     public static void main(String[] args) {
 
     }
