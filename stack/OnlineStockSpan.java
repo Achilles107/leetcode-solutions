@@ -1,5 +1,6 @@
 package stack;
 
+
 import java.util.Stack;
 
 public class OnlineStockSpan {
@@ -34,7 +35,6 @@ public class OnlineStockSpan {
                 newPrice.days += 1;
                 this.stocks.push(newPrice);
             }
-
             return newPrice.days;
         }
     }

@@ -21,17 +21,17 @@ public class ReorderList {
     public void reorderList(ListNode head) {
         ListNode temp = head;
         int len = len(head);
-        ListNode[] firsthalf;
+        int firstHalfLen = 0;
         if (len % 2 == 0) {
-            firsthalf = new ListNode[len/2];
+            firstHalfLen = len/2;
         } else {
-            firsthalf = new ListNode[(len/2)+1];
+            firstHalfLen = (len/2)+1;
         }
-        ListNode[] secondHalf = new ListNode[len - firsthalf.length];
+        ListNode[] secondHalf = new ListNode[len - firstHalfLen];
         temp = head;
         int idx = 0;
-        while (temp != null && idx < firsthalf.length) {
-            firsthalf[idx++] = temp;
+        while (temp != null && idx < firstHalfLen) {
+            idx++;
             temp = temp.next;
         }
         idx = 0;
