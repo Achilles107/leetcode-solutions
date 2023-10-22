@@ -59,6 +59,7 @@ public class AlienDictionary {
     }
     public String alienOrder(String[] words) {
         Map<Character, List<Character>> relations = createRelation(words);
+        System.out.println(relations);
         if (cycle)
             return "";
         for (char ch: relations.keySet()) {
@@ -71,7 +72,7 @@ public class AlienDictionary {
         return this.alphabets.length() == relations.size() ? alphabets.toString() : "";
     }
     public static void main(String[] args) {
-        String words[] = {"abc","ab"};
+        String words[] = {"dbc","acy"};
         System.out.println(new AlienDictionary().alienOrder(words));
     }
 }
