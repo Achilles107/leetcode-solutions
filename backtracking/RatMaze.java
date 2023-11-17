@@ -1,5 +1,7 @@
 package backtracking;
 
+import java.util.Arrays;
+
 public class RatMaze {
     boolean solveMaze(int maze[][]){
         int sol[][] = new int[maze.length][maze.length];
@@ -23,7 +25,6 @@ public class RatMaze {
         }
 
         if (isSafe(x,y,maze,n)) {
-
             if (sol[x][y] == 1)
                 return false;
             sol[x][y] = 1;
