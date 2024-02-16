@@ -56,3 +56,4 @@ public class TimeBasedKeyValueStore {
             return time.get(right - 1).getValue();
         }
     }
+}
